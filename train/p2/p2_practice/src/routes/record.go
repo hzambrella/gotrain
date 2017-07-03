@@ -194,3 +194,5 @@ func PrtOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+//TODO 查询打印机状态,json格式的结果返回到浏览器上

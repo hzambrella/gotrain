@@ -11,8 +11,8 @@ type OrderDB interface {
 	Close()
 	GetItemsByShopId(shopId uint64) ([]Item, error)
 	GetRecordById(recordId uint64) (*Record, error)
-	GetTableById(tableId string) (*Table, error)
-	GetShopById(shopId uint64) (*Shop, error)
+	//	GetTableById(tableId string) (*Table, error)
+	//	GetShopById(shopId uint64) (*Shop, error)
 	GetPrtsByShopId(shopId uint64) ([]Prt, error)
 }
 
@@ -171,70 +171,26 @@ func (db *orderDB) GetRecordById(recordId uint64) (*Record, error) {
 	return &result, nil
 }
 
+//TODO
 const (
 	getTableByIdSql = `
-	SELECT
-		id, shop_id, table_name, qr_code 
-	FROM
-		order_table 
-	WHERE
-		id=?
 `
 )
 
 func (db *orderDB) GetTableById(tableId string) (*Table, error) {
 	var table Table
-	if err := db.QueryRow(getTableByIdSql, tableId).Scan(
-		&table.Id,
-		&table.ShopId,
-		&table.Name,
-		&table.QrCode,
-	); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, DataNotFound
-		}
-		return nil, err
-	}
-	return &table, nil
+	//TODO
 }
 
+//TODO
 const (
 	getShopByIdSql = `
-	SELECT
-		id, name, message, ndagent, 
-		nd_cash_store_id, status, create_time, update_time,logo
-	FROM
-		order_shop 
-	WHERE
-		id=?
 `
 )
 
 func (db *orderDB) GetShopById(shopId uint64) (*Shop, error) {
 	var shop Shop
-	//var time1 time.Time
-	//var time2 time.Time
-	if err := db.QueryRow(getShopByIdSql, shopId).Scan(
-		&shop.Id,
-		&shop.Name,
-		&shop.Message,
-		&shop.NdAgent,
-		&shop.NdcsId,
-		&shop.Status,
-		&shop.CreateTime,
-		&shop.UpdateTime,
-		//&time1,
-		//&time2,
-		&shop.Logo,
-	); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, DataNotFound
-		}
-		return nil, err
-	}
-	//shop.CreateTime = time1.Format("01-02 15:04")
-	//shop.UpdateTime = time2.Format("01-02 15:04")
-	return &shop, nil
+	//TODO
 }
 
 const (

@@ -84,47 +84,7 @@ func NewPrt(prtType int, deviceNo, key string) (*Prt, error) {
 // 返回Resp。若code>=10,会返回错误,需要处理
 // code<10，缺纸打印机没开之类的，无需重新发送订单。
 func (prt *Prt) PrintString(content string) (*PrtResp, error) {
-	response, err := http.PostForm(printContentUrl,
-		url.Values{"deviceNo": {prt.DeviceNo}, "key": {prt.Key}, "printContent": {content}, "times": {strconv.Itoa(1)}})
-
-	if err != nil {
-		return nil, err
-	} else {
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			return nil, err
-		}
-		if body == nil {
-			return nil, errors.New("resp body is nil")
-		}
-
-		var resp PrtResp
-		err = json.Unmarshal(body, &resp)
-		if err != nil {
-			return nil, err
-		}
-
-		code, err := strconv.Atoi(resp.ResponseCode)
-		if err != nil {
-			return nil, err
-		}
-		var minErrCode int
-
-		switch prt.Type {
-		case S1:
-			minErrCode = 10
-		case USB:
-			minErrCode = 2
-		default:
-			return nil, ErrWrongType
-		}
-
-		if code >= minErrCode {
-			return &resp, errors.New(resp.Msg)
-		} else {
-			return &resp, nil
-		}
-	}
+	//TODO
 }
 
 // 查询订单打印的状态
@@ -167,35 +127,5 @@ func (prt *Prt) QueryOrder(orderindex string) (*QueryResp, error) {
 
 // 查询打印机状态
 func (prt *Prt) GetPrtStatus() (*QueryResp, error) {
-	response, err := http.PostForm(getPrtStatusUrl,
-		url.Values{"deviceNo": {prt.DeviceNo}, "key": {prt.Key}})
-
-	if err != nil {
-		return nil, err
-	} else {
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			return nil, err
-		}
-		if body == nil {
-			return nil, errors.New("body is nil")
-		}
-
-		var resp QueryResp
-		err = json.Unmarshal(body, &resp)
-		if err != nil {
-			return nil, err
-		}
-
-		code, err := strconv.Atoi(resp.ResponseCode)
-		if err != nil {
-			return nil, err
-		}
-		minErrCode := 2
-		if code >= minErrCode {
-			return &resp, errors.New(resp.Msg)
-		} else {
-			return &resp, nil
-		}
-	}
+	//TODO
 }
