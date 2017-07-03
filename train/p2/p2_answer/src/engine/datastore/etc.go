@@ -19,8 +19,8 @@ func Parse(src []byte) (Data, error) {
 
 //
 func (d Data) ToJson() []byte {
-	result, err := json.MarshalIndent(d, "","	")
-	if err != nil{
+	result, err := json.MarshalIndent(d, "", "	")
+	if err != nil {
 		panic(err)
 	}
 	return result
@@ -36,15 +36,15 @@ func (d Data) Set(key, val string) {
 }
 
 // read from file
-func ParseDataFromFile(fileName string)(Data, error){
+func ParseDataFromFile(fileName string) (Data, error) {
 	data, err := ioutil.ReadFile(fileName)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	return Parse(data)
 }
 
 // save to file
-func SaveDataToFile(fileName string, d Data) error{
+func SaveDataToFile(fileName string, d Data) error {
 	return ioutil.WriteFile(fileName, d.ToJson(), 0666)
 }

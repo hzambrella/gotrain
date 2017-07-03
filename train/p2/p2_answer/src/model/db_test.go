@@ -1,22 +1,22 @@
 package model
 
 import (
-	"fmt"
-	"testing"
 	"engine/datastore"
+	"fmt"
 	"log"
+	"testing"
 )
 
-var db *OrderDB
+var db OrderDB
 
-func init(){
+func init() {
 	d, err := datastore.ParseDataFromFile("../key.cfg")
 	if err != nil {
 		log.Fatal(err)
 	}
-	dsn:=d["dsn"]
-	db,err=NewOrderDB(dsn)
-	if err!=nil{
+	dsn := d["dsn"]
+	db, err = NewOrderDB(dsn)
+	if err != nil {
 		fmt.Println(err.Error())
 	}
 }
