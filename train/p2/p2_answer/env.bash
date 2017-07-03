@@ -1,7 +1,8 @@
 GOGO=`pwd`
 cd ../../
-mkdir pkg
-export GOLIBS=`pwd`
+export GOLIBS="$(dirname `pwd`)/pkg"
+mkdir -p $GOLIBS/src
 cd -
+echo $GOLIBS
 export GOPATH=$GOLIBS:$GOGO
 echo $GOPATH
