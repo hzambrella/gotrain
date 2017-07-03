@@ -1,17 +1,17 @@
 package main
 
 import (
-	"cloudprt"
-	"strconv"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
 	"model"
 	"net/http"
+	"strconv"
 
 	"engine/datastore"
 	"lib/bs"
+	"lib/cloudprt"
 )
 
 var (
@@ -76,7 +76,7 @@ func prtOrder(w http.ResponseWriter, r *http.Request) {
 	orderDB, err := model.NewOrderDB(d["dsn"])
 	if err != nil {
 		errMsg = err.Error()
-		log.Fatal("haha"+errMsg)
+		log.Fatal("haha" + errMsg)
 		return
 	}
 
@@ -87,8 +87,8 @@ func prtOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-//TODO:order printOB
-//改写下面代码，打印订单
+	//TODO:order printOB
+	//改写下面代码，打印订单
 	items, err := orderDB.GetItemsByShopId(shopIdStr)
 	if err != nil {
 		if err != model.OrderDataNotFound {
@@ -103,7 +103,7 @@ func prtOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(items)
-//TODO:格式化成msg--------------------
+	//TODO:格式化成msg--------------------
 	prtResp, err := prt.PrintString(msg)
 	if err != nil {
 		errMsg = err.Error()

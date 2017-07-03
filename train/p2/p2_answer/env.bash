@@ -1,4 +1,7 @@
 GOGO=`pwd`
+cd ../../
 mkdir pkg
-export GOPATH=$GOGO
+GOLIBS=`pwd`
+cd -
+export GOPATH=$GOLIBS:$GOGO
 echo $GOPATH
